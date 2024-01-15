@@ -1,0 +1,26 @@
+services:
+  mysql:
+    image: 'mysql:8.2.0'
+    container_name: 'db-container'
+    restart: 'always'
+    environment:
+      - 'MYSQL_DATABASE=dbfpyme'
+      - 'MYSQL_ALLOW_EMPTY_PASSWORD=yes'
+      #- 'MYSQL_PASSWORD=secret'
+      #- 'MYSQL_ROOT_PASSWORD=verysecret'
+      #- 'MYSQL_USER=myuser'
+    ports:
+      - '3306:3306'
+    volumes:
+      - './data/DB.sql:/docker-entrypoint-initdb.d/BD.sql'
+
+  spring-app:
+    image: 'servfpyme'
+    container_name: 'servfpyme-container'
+    ports:
+      - "0.0.0.0:9090:9090"
+    depends_on:
+      - 'mysql'
+    environment:
+      - 'SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/dbfpyme'
+      - 'SPRING_DATASOURCE_USERNAME=root'
