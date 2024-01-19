@@ -8,11 +8,28 @@ services:
       - 'MYSQL_ALLOW_EMPTY_PASSWORD=yes'
       #- 'MYSQL_PASSWORD=secret'
       #- 'MYSQL_ROOT_PASSWORD=verysecret'
-      #- 'MYSQL_USER=myuser'
+      #- 'MYSQL_USER=user'
     ports:
       - '3306:3306'
+    networks:
+      - 'default'
     volumes:
       - './data/DB.sql:/docker-entrypoint-initdb.d/BD.sql'
+
+  phpmyadmin:
+    image: 'phpmyadmin/phpmyadmin'
+    container_name: 'phpmyadmin-container'
+    environment:
+      - 'PMA_ARBITRARY=1'
+      #- 'MYSQL_USER=user'
+      #- 'MYSQL_PASSWORD=secret'
+      #- 'MYSQL_ROOT_PASSWORD=verysecret'
+    ports:
+      - '8181:80'
+    links:
+      - 'mysql:mysql'
+    depends_on:
+      - 'mysql'
 
   spring-app:
     image: 'servfpyme'
@@ -21,6 +38,10 @@ services:
       - "0.0.0.0:9090:9090"
     depends_on:
       - 'mysql'
+    networks:
+      - 'default'
+    links:
+      - 'mysql:mysql'
     environment:
       - 'SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/dbfpyme'
       - 'SPRING_DATASOURCE_USERNAME=root'

@@ -2,10 +2,17 @@
 
 rem Definir el nombre de la imagen
 set IMAGEN=servfpyme
+
+echo Recompilando servidor
+mvn clean install -DskipTests
+
+if %errorlevel% neq 0(
+    echo Error al recompilar
+    exit /b %errorlevel%
+)
+
 echo Borrando imagen existente: %IMAGEN%
 docker rmi %IMAGEN%
-
-rem Construir la imagen de Docker
 
 echo Construyendo la imagen de Docker: %IMAGEN%
 docker build -t %IMAGEN% .
@@ -15,7 +22,6 @@ if %errorlevel% neq 0 (
 )
 echo Imagen construida exitosamente.
 
-rem Lanzar el contenedor usando Docker Compose
 
 echo Iniciando el contenedor con Docker Compose...
 docker-compose up -d
