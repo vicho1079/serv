@@ -1,5 +1,4 @@
 package com.fpyme.serv.model.entity;
-import com.fpyme.serv.model.dto.ProductoDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,22 +11,21 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "producto")
 @Data
-
-
 public class Producto {
     @Id
     @Column(name = "id_prod")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_prod;
+    private Long idProd;
 
     @Column(nullable = false, name = "nombre_prod")
-    private String nombre_prod;
+    private String nombreProd;
 
     @Column(nullable = false, name = "precio")
     private int precio;
 
     @Column(nullable = false, name = "estado")
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    private EstadoProducto estado;
 
     @Column(nullable = false, name = "imagen")
     private String imagen;
@@ -35,13 +33,9 @@ public class Producto {
     @Column(nullable = false, name = "descripcion")
     private String descripcion;
 
-    public ProductoDto aProductoDto(){
-        return ProductoDto.builder()
-                .id_prod(id_prod)
-                .nombre_prod(nombre_prod)
-                .precio(precio)
-                 .imagen(imagen)
-                .descripcion(descripcion)
-                .build();
-    }
+    @OneToOne(targetEntity = Oferta.class, cascade = CascadeType.ALL)
+    // ver despues que se elige como cascade. Evaluar mejor el tipo de relacion que se quiere.
+    @JoinColumn(name = "id_oferta", unique = true)
+    private Oferta oferta;
+
 }

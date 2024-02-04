@@ -1,5 +1,4 @@
 package com.fpyme.serv.model.entity;
-import com.fpyme.serv.model.dto.ProductoDto;
 import com.fpyme.serv.model.dto.SucursalDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

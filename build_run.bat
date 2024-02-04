@@ -3,16 +3,14 @@
 rem Definir el nombre de la imagen
 set IMAGEN=servfpyme
 
-echo Recompilando servidor
-mvn clean install -DskipTests
-
-if %errorlevel% neq 0(
-    echo Error al recompilar
-    exit /b %errorlevel%
-)
 
 echo Borrando imagen existente: %IMAGEN%
 docker rmi %IMAGEN%
+
+if %errorlevel% neq 0 (
+    echo Ya imagen ya esta borrada
+    exit /b %errorlevel%
+)
 
 echo Construyendo la imagen de Docker: %IMAGEN%
 docker build -t %IMAGEN% .
