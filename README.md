@@ -26,6 +26,11 @@ Esta carpeta consta con 2 archivos:
   * sesionManagement: La politica de las sesiones es Stateless.
   * authenticationProvider: El auth provider va a ser el bean que fue declarado en la clase "ApplicationConfig".
   * addFilterBefore: Se aplica el filter personalizado para validar tokens jwt.
+ 
+### Controllers
+Esta carpeta consta de 3 archivos:
+* AuthController: Este controlador se encarga de los endpoint que llegan a la ruta "/auth/**". Se tiene 2 metodos:
+  * login: Se encarga de los metodos HTTP POST que llegan al endpoint "/login". Espera un "LoginRequest" como request body, el cual esta especificado en ["LoginRequest.java"](src/main/java/com/fpyme/serv/model/dto/LoginRequest.java).
 
  ## Tareas pendientes
  * agregar.
