@@ -19,4 +19,13 @@ En la carpeta serv que se en cuentra en la ruta "src/main/java/com/fpyme/serv" s
 * services.
 ### Configuration
 Esta carpeta consta con 2 archivos:
-* WebSecurityConfig: 
+* ApplicationConfig: Esta clase crea todos los beans necesarios para que la autenticación pueda funcionar(AuthenticationManager, AuthenticationProvider, PasswordEncoder y UserDetailsService). Esta clase no tiene el mejor nombre y deberia ser cambiado.
+* WebSecurityConfig: Esta clase crea el bean SecurityFilterChain que se encarga de filtrar las request http para que cumplan los parametros de seguridad que son:
+  * csrf: desactivado.
+  * authorizedHttpRequest: Las request que lleguen al endpoint "/auth/**" y "/doc/swagger-ui.html" quedan autorizadas automanticamente el resto sigen la cadena de seguridad.
+  * sesionManagement: La politica de las sesiones es Stateless.
+  * authenticationProvider: El auth provider va a ser el bean que fue declarado en la clase "ApplicationConfig".
+  * addFilterBefore: Se aplica el filter personalizado para validar tokens jwt.
+
+ ## Tareas pendientes
+ * agregar.
