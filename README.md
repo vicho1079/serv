@@ -1,4 +1,8 @@
 # ServFpyme:
+## Contenidos
+* [Stack](https://github.com/vicho1079/serv/tree/dev?tab=readme-ov-file#stack).
+* [Estructura del proyecto](https://github.com/vicho1079/serv/tree/dev?tab=readme-ov-file#estructura-del-proyecto)
+* [Tareas pendientes](https://github.com/vicho1079/serv/tree/dev?tab=readme-ov-file#tareas-pendientes)
 ## Stack
 Se utiliza springboot v3.2.1 del lado del servidor usando las dependencias:
 * Spring Web;
@@ -30,7 +34,7 @@ Esta carpeta consta con 2 archivos:
 ### Controllers
 Esta carpeta consta de 3 archivos:
 * AuthController: Este controlador se encarga de los endpoint que llegan a la ruta "/auth/**". Se tiene 2 metodos:
-  * login: Se encarga de los metodos HTTP POST que llegan al endpoint "/login". Espera un "LoginRequest" como request body, el cual esta especificado en ["LoginRequest.java"](src/main/java/com/fpyme/serv/model/dto/LoginRequest.java).
+  * login: Se encarga de los metodos HTTP POST que llegan al endpoint "/login". Espera un "LoginRequest" como request body, el cual esta especificado en ["LoginRequest.java"](src/main/java/com/fpyme/serv/model/dto/LoginRequest.java). Retorna el resultado de llamar el metodo login de AuthService.
 
  ## Tareas pendientes
  * agregar.
